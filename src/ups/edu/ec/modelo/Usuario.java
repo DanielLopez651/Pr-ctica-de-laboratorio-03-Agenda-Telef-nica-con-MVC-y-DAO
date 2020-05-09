@@ -5,8 +5,6 @@
  */
 package ups.edu.ec.modelo;
 
-import java.util.Objects;
-
 /**
  *
  * @author Daniel Lopez G.
