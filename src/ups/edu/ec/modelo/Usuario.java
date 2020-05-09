@@ -5,6 +5,8 @@
  */
 package ups.edu.ec.modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author Daniel Lopez G.
@@ -60,6 +62,9 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
+
+
+    
     @Override
     public String toString() {
         return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", contrase\u00f1a=" + contraseña + '}';
