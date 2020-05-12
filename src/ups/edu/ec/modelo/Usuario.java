@@ -5,6 +5,9 @@
  */
 package ups.edu.ec.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Daniel Lopez G.
@@ -16,9 +19,22 @@ public class Usuario {
     private String apellido;
     private String correo;
     private String contraseña;
-
+    private Telefono[] telefonos;
+    private int cont;
     public Usuario() {
+        telefonos= new Telefono[10];
+        cont=0;  
     }
+
+    public Usuario(String cedula, String nombre, String apellido, String correo) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+         
+        
+    }
+    
 
     public String getCedula() {
         return cedula;
@@ -59,13 +75,24 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-
-
+    public void agregarTelefono(Telefono phone){
+    if(cont<10){
+        telefonos[cont]=phone;
+        cont++;
+    }
+    }
 
     
     @Override
     public String toString() {
-        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", contrase\u00f1a=" + contraseña + '}';
+        String telefonos="";
+        for (int i = 0; i < cont; i++) {
+           telefonos+=this.telefonos[i]+"\n"; 
+        
+        }
+            
+        
+        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + telefonos + '}';
     }
     
 }
