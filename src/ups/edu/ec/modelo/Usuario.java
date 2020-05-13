@@ -7,24 +7,25 @@ package ups.edu.ec.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author Daniel Lopez G.
  */
 public class Usuario {
-
+    //atributos de la clase
     private String cedula;
     private String nombre;
     private String apellido;
     private String correo;
     private String contraseña;
-    private Telefono[] telefonos;
-    private int cont;
+    //atributo para el metodo de agregacion
+    private List<Telefono>telefonos;
     public Usuario() {
-        telefonos= new Telefono[10];
-        cont=0;  
+        telefonos = new ArrayList<>();
     }
+    
 
     public Usuario(String cedula, String nombre, String apellido, String correo) {
         this.cedula = cedula;
@@ -75,24 +76,71 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    public void agregarTelefono(Telefono phone){
-    if(cont<10){
-        telefonos[cont]=phone;
-        cont++;
+    public void agregarTelefono(Telefono telefono){
+        telefonos.add(telefono);
+
     }
+    public void actualizarTelefono(Telefono telefono){
+        if(telefonos.contains(telefono)){
+            int index=telefonos.indexOf(telefono);
+        }
+    }
+    public void eliminarTelefono(Telefono telefono){
+         if(telefonos.contains(telefono)){
+            int index=telefonos.indexOf(telefono);
+            telefonos.remove(index);
+        }
+    }
+    public List<Telefono> listar(){
+        return telefonos;
+    }
+    public Telefono buscar(int codigo){
+        return telefonos.get(codigo);
+        
+              
     }
 
-    
     @Override
-    public String toString() {
-        String telefonos="";
-        for (int i = 0; i < cont; i++) {
-           telefonos+=this.telefonos[i]+"\n"; 
-        
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.cedula);
+        hash = 29 * hash + Objects.hashCode(this.contraseña);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
-            
-        
-        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + telefonos + '}';
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.cedula, other.cedula)) {
+            return false;
+        }
+        if (!Objects.equals(this.contraseña, other.contraseña)) {
+            return false;
+        }
+        return true;
     }
     
+    
+  
+    
+    
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + "\nTelefonos: "+telefonos.toString()  +'}';
+    }
+
+  
+ 
+    
+
 }
