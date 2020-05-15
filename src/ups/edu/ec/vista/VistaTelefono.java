@@ -8,6 +8,7 @@ package ups.edu.ec.vista;
 import java.util.Scanner;
 import ups.edu.ec.modelo.Telefono;
 import java.util.List;
+import ups.edu.ec.modelo.Usuario;
 
 /**
  *
@@ -37,7 +38,7 @@ public class VistaTelefono {
 
     public Telefono actualizarTelefono() {
         entrada = new Scanner(System.in);
-        System.out.println("Ingresa el codigo de la direccion a actualizar");
+        System.out.println("Ingresa el codigo a actialuzar ");
         int codigo = entrada.nextInt();
         System.out.println("Ingrese los nuevos Datos (numero,  tipo, operadora)");
         String numero = entrada.next();
@@ -50,23 +51,23 @@ public class VistaTelefono {
         entrada = new Scanner(System.in);
         System.out.println("Ingresa el codigo de telefono a eliminar");
         int codigo = entrada.nextInt();
-        return new Telefono(codigo, null, null, null);
+        return new Telefono(codigo);
     }
 
-    public int buscarTelefono() {
+     public int buscarTelefono() {
         entrada = new Scanner(System.in);
-        System.out.println("Ingresa el codigo del telefono a buscar");
+        System.out.println("Ingresa el id del cliente a buscar");
         int codigo = entrada.nextInt();
         return codigo;
     }
 
     public void verTelefono(Telefono telefono) {
-        System.out.println("Datos del Cliente: " + "\n" + telefono);
+        System.out.println("Datos del Cliente: " + telefono);
     }
 
-    public void verTelefono(List<Telefono> telefonos) {
+    public void verTelefonos(List<Telefono> telefonos) {
         for (Telefono telefono : telefonos) {
-            System.out.println("Datos de la direcci´´n: " + telefono);
+            System.out.println("Datos del Cliente: " +telefono);
         }
     }
 }

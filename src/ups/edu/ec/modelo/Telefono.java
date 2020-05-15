@@ -19,6 +19,11 @@ public class Telefono {
     public Telefono() {
     }
 
+    public Telefono(int codigo) {
+        this.codigo = codigo;
+    }
+    
+
     public Telefono(int codigo, String numero, String tipo, String operadora) {
         this.codigo = codigo;
         this.numero = numero;
@@ -83,6 +88,7 @@ public class Telefono {
         }
         return true;
     }
+     
     
 
     @Override

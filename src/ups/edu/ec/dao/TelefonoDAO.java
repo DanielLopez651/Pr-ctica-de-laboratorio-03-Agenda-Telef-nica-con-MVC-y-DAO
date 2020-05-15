@@ -8,14 +8,14 @@ package ups.edu.ec.dao;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import ups.edu.ec.idao.ITelefonoDao;
 import ups.edu.ec.modelo.Telefono;
+import ups.edu.ec.idao.ITelefonoDAO;
 
 /**
  *
  * @author user
  */
-public class TelefonoDAO implements ITelefonoDao {
+public class TelefonoDAO implements ITelefonoDAO {
 
     private List<Telefono> listaTelefono;
 
@@ -41,12 +41,14 @@ public class TelefonoDAO implements ITelefonoDao {
     @Override
     public void update(Telefono telefono) {
         for (int i = 0; i < listaTelefono.size(); i++) {
-            Telefono c = listaTelefono.get(i);
-            if (c.getCodigo() == telefono.getCodigo()) {
+            Telefono t = listaTelefono.get(i);
+            if (t.getCodigo()==telefono.getCodigo()) {
                 listaTelefono.set(i, telefono);
                 break;
             }
         }
+  
+
 
     }
 
@@ -54,8 +56,8 @@ public class TelefonoDAO implements ITelefonoDao {
     public void delete(Telefono telefono) {
         Iterator<Telefono> it = listaTelefono.iterator();
         while (it.hasNext()) {
-            Telefono t = it.next();
-            if (t.getCodigo() == telefono.getCodigo()) {
+            Telefono te = it.next();
+            if (te.getCodigo() == telefono.getCodigo()) {
                 it.remove();
                 break;
             }

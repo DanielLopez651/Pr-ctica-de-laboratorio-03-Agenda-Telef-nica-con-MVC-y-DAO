@@ -10,6 +10,7 @@ import ups.edu.ec.controlador.ControladorTelefono;
 import ups.edu.ec.controlador.ControladorUsuario;
 import ups.edu.ec.dao.TelefonoDAO;
 import ups.edu.ec.dao.UsuarioDAO;
+import ups.edu.ec.modelo.Usuario;
 import ups.edu.ec.vista.VistaTelefono;
 import ups.edu.ec.vista.VistaUsuario;
 
@@ -20,9 +21,9 @@ import ups.edu.ec.vista.VistaUsuario;
 public class Principal {
 
     public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
-        boolean ban = true;
         // vista
+        Scanner entrada = new Scanner(System.in);
+
         VistaUsuario vistaU = new VistaUsuario();
         VistaTelefono vistaT = new VistaTelefono();
         //DAOs
@@ -31,69 +32,124 @@ public class Principal {
         // controlador
         ControladorUsuario controladorUsuario = new ControladorUsuario(vistaU, usuarioDAO, vistaT, telefonoDAO);
         ControladorTelefono controladorTelefono = new ControladorTelefono(vistaT, telefonoDAO);
-         do {
-            //Switch
-            System.out.println("1)agrega cliente");
-            System.out.println("2)edita por cedular");
-            System.out.println("3)elimina   ar Clientes");
-            System.out.println("4)guarda telea");
-            System.out.println("5)asigna ");
-            System.out.println("6)muestra ");
-            System.out.println("7) salir");
-            int x = entrada.nextInt();
-            switch (x) {
-                case 1:
-                    ban=true;
-        // guarda un cliente a través del controlador        
-        controladorUsuario.registrar();
+
+//        controladorUsuario.registrar();                
+//        // ver clientes
+//        controladorUsuario.verUsuarios();
+//
+//        // editar un cliente por medio del id        
+//        controladorUsuario.actualizar();
+//
+//        // ver clientes
+//        controladorUsuario.verUsuarios();
+//
+//        // eliminar un cliente por medio del id
+//        controladorUsuario.eliminar();
+//
+//        // ver clientes
+//        controladorUsuario.verUsuarios();
+//        
+//        // guardar direcciones
+//        controladorTelefono.registrar();
+//        //controladorDireccion.registrar();
+//        //controladorDireccion.registrar();
+//        
+//        //ver direcciones
+//        controladorTelefono.verTelefonos();
+//        
+//        //asignar direcion
+//        controladorUsuario.verUsuario();
+//        controladorUsuario.agregarTelefono();
+//        
+//        //ver clientes
+//        controladorUsuario.verUsuarios();
+//        controladorTelefono.actualizar();
+//        controladorUsuario.verUsuarios();
+        boolean ban = true;
+
+        //Switch
+        System.out.println("1)registar");
+        System.out.println("2)iniciar");
+        System.out.println("3)listar por cedula");
+        System.out.println("4)salir");
+
         
+        int x = entrada.nextInt();
+        switch (x) {
+            case 1:
+                ban = true;
+                // guarda un cliente a través del controlador        
+                controladorUsuario.registrar();
 
-        // ver clientes
-        controladorUsuario.verUsuarios();
-            break;
-                case 2 :
-                    ban=true;
-        // editar un cliente por medio del id        
-        controladorUsuario.actualizar();
-
-        // ver clientes
-        controladorUsuario.verUsuarios();
-            break;
-                case 3:
-                    ban = true;
-        // eliminar un cliente por medio del id
-        controladorUsuario.eliminar();
-
-        // ver clientes
-        controladorUsuario.verUsuarios();
-        break;
-                case 4:
-                    ban=true;
-        // guardar direcciones
-        controladorTelefono.registrar();
-        //controladorDireccion.registrar();
-        //controladorDireccion.registrar();
-
-        //ver direcciones
-        controladorTelefono.verTelefonos();
-            break;
-                case 5:
-                    ban=true;
-        //asignar direcion
-        controladorUsuario.verUsuario();
-        controladorUsuario.agregarTelefono();
                 break;
-                case 6:
-                    ban=true;
-        //ver clientes
-        controladorUsuario.verUsuarios();
-            break;
-            case 7:
-                    System.exit(0);
-                    ban = false;
-                    break;
-            }
+            case 2:
+                ban = true;
+                System.out.println("correo");
+                String correo = entrada.next();
+                System.out.println("contraseña");
+                String contraseña = entrada.next();
+                Usuario usu;
 
-        } while (ban);
+                usu = usuarioDAO.validarUsuario(correo, contraseña);
+                if (usu != null) {
+                    System.out.println("usuario valido");
+
+                    do {
+                        //Switch
+                        System.out.println("1)registar telefono");
+
+                        System.out.println("2)cambiar telefono");
+                        System.out.println("3)eliminar");
+                        System.out.println("4)listar");
+                        System.out.println("5)regresar");
+
+                        x = entrada.nextInt();
+                        switch (x) {
+                            case 1:
+                                ban = true;
+                                // guardar direcciones
+                                controladorTelefono.registrar();
+                                break;
+                            case 2:
+                                ban = true;
+                                controladorTelefono.actualizar();
+                                break;
+                            case 3:
+                                ban = true;
+                                controladorTelefono.eliminar();
+                                break;
+                            case 4:
+                                ban = true;
+                                controladorTelefono.verTelefonos();
+                            case 5:
+                                System.exit(0);
+
+                        }
+
+                        break;
+                    } while (ban);
+                }
+
+                break;
+            case 3:
+
+                Usuario verificacion = usuarioDAO.mostrarPorCedula();
+                if (verificacion != null) {
+                    controladorTelefono.verTelefonos();
+                }
+
+                break;
+
+            case 4:
+
+                System.exit(0);
+
+                break;
+            case 5:
+                controladorTelefono.verTelefonos();
+                break;
+        }
+
     }
+
 }

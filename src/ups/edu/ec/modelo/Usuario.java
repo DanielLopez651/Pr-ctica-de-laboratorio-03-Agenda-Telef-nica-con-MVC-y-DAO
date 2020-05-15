@@ -14,6 +14,7 @@ import java.util.Objects;
  * @author Daniel Lopez G.
  */
 public class Usuario {
+
     //atributos de la clase
     private String cedula;
     private String nombre;
@@ -21,21 +22,29 @@ public class Usuario {
     private String correo;
     private String contraseña;
     //atributo para el metodo de agregacion
-    private List<Telefono>telefonos;
+    private List<Telefono> telefonos;
+
     public Usuario() {
         telefonos = new ArrayList<>();
     }
-    
 
     public Usuario(String cedula, String nombre, String apellido, String correo) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-         
-        
+        telefonos = new ArrayList<>();
+
     }
-    
+
+    public Usuario(String cedula, String nombre, String apellido, String correo, String contraseña) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.contraseña = contraseña;
+        telefonos = new ArrayList<>();
+    }
 
     public String getCedula() {
         return cedula;
@@ -76,28 +85,32 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    public void agregarTelefono(Telefono telefono){
+
+    public void agregarTelefono(Telefono telefono) {
         telefonos.add(telefono);
 
     }
-    public void actualizarTelefono(Telefono telefono){
-        if(telefonos.contains(telefono)){
-            int index=telefonos.indexOf(telefono);
+
+    public void actualizarTelefono(Telefono telefono) {
+        if (telefonos.contains(telefono)) {
+            int index = telefonos.indexOf(telefono);
+            telefonos.set(index, telefono);
         }
     }
-    public void eliminarTelefono(Telefono telefono){
-         if(telefonos.contains(telefono)){
-            int index=telefonos.indexOf(telefono);
+
+    public void eliminarTelefono(Telefono telefono) {
+        if (telefonos.contains(telefono)) {
+            int index = telefonos.indexOf(telefono);
             telefonos.remove(index);
         }
     }
-    public List<Telefono> listar(){
+
+    public List<Telefono> listar() {
         return telefonos;
     }
-    public Telefono buscar(int codigo){
+
+    public Telefono buscar(int codigo) {
         return telefonos.get(codigo);
-        
-              
     }
 
     @Override
@@ -128,19 +141,10 @@ public class Usuario {
         }
         return true;
     }
-    
-    
-  
-    
-    
 
     @Override
     public String toString() {
-        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + "\nTelefonos: "+telefonos.toString()  +'}';
+        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + '}' + "\nDirecciones: " + telefonos.toString();
     }
-
-  
- 
-    
 
 }
